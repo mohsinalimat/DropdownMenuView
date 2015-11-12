@@ -52,7 +52,7 @@ public class PCDropdownMenuView: UIView, UITableViewDataSource, UITableViewDeleg
     
     override public var frame: CGRect {
         set {
-            super.frame = UIScreen.mainScreen().applicationFrame
+            super.frame = UIScreen.mainScreen().bounds
         }
         get {
             return super.frame
@@ -61,7 +61,7 @@ public class PCDropdownMenuView: UIView, UITableViewDataSource, UITableViewDeleg
     
     override public var bounds: CGRect {
         set {
-            super.bounds = UIScreen.mainScreen().applicationFrame
+            super.bounds = UIScreen.mainScreen().bounds
         }
         get {
             return super.bounds
@@ -77,6 +77,7 @@ public class PCDropdownMenuView: UIView, UITableViewDataSource, UITableViewDeleg
         let tapGesture = UITapGestureRecognizer(target: self, action: Selector("tapGestureAction:"))
         tapGesture.delegate = self
         self.addGestureRecognizer(tapGesture)
+        self.backgroundColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.2)
         
         self.addSubview(contentView)
         contentView.addSubview(arrowImageView)

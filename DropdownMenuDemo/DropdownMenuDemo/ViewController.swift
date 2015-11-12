@@ -19,7 +19,7 @@ class ViewController: UIViewController, PCDropdownMenuViewDataSource, PCDropdown
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor.grayColor()
+        self.view.backgroundColor = UIColor.whiteColor()
         
         let barButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: Selector("showDropdownMenu"))
         self.navigationItem.rightBarButtonItem = barButton
@@ -62,8 +62,9 @@ class ViewController: UIViewController, PCDropdownMenuViewDataSource, PCDropdown
     }
     
     func dropdownMenuViewContentFrame(view: PCDropdownMenuView) -> CGRect {
+        let isPortrait = UIInterfaceOrientationIsPortrait(self.interfaceOrientation)
         let x: CGFloat = UIScreen.mainScreen().bounds.size.width - menuWidth - 5.0
-        let y = self.navigationController?.navigationBar.frame.size.height ?? 44.0
+        let y: CGFloat = isPortrait ? 64.0 : (self.navigationController?.navigationBar.frame.size.height ?? 44.0)
         return CGRectMake(x, y, menuWidth, 0.0)
     }
     
@@ -74,6 +75,8 @@ class ViewController: UIViewController, PCDropdownMenuViewDataSource, PCDropdown
     // MARK: - PCDropdownMenuViewDelegate
     
     func dropdownMenuViewDidSelectedItem(view: PCDropdownMenuView, inIndex index: Int) {
+        view.hiddenWithAnimate(true)
+        
         let item = items[index]
         print(item.name)
     }
