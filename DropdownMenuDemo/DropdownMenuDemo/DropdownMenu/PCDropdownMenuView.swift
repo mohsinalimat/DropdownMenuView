@@ -74,7 +74,7 @@ public class PCDropdownMenuView: UIView, UITableViewDataSource, UITableViewDeleg
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        let tapGesture = UITapGestureRecognizer(target: self, action: Selector("tapGestureAction:"))
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(PCDropdownMenuView.tapGestureAction(_:)))
         tapGesture.delegate = self
         self.addGestureRecognizer(tapGesture)
         self.backgroundColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.2)

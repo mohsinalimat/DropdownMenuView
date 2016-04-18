@@ -21,7 +21,7 @@ class ViewController: UIViewController, PCDropdownMenuViewDataSource, PCDropdown
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.whiteColor()
         
-        let barButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: Selector("showDropdownMenu"))
+        let barButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: #selector(ViewController.showDropdownMenu))
         self.navigationItem.rightBarButtonItem = barButton
         
         dropdownMenuView.dataSource = self
