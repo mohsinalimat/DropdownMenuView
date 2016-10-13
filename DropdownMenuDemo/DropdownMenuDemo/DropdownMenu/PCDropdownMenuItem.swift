@@ -8,10 +8,10 @@
 
 import UIKit
 
-public class PCDropdownMenuItem: NSObject {
+open class PCDropdownMenuItem: NSObject {
 
-    public var name: String
-    public var icon: String?
+    open var name: String
+    open var icon: String?
     
     init(name: String, icon: String?) {
         self.name = name

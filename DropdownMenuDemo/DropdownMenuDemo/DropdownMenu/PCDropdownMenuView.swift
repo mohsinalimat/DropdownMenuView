@@ -8,7 +8,7 @@
 
 import UIKit
 
-private let DROPDOWN_MENU_ANIMATE_DURATION: NSTimeInterval = 0.5
+private let DROPDOWN_MENU_ANIMATE_DURATION: TimeInterval = 0.5
 
 
 // MARK: -
@@ -16,15 +16,15 @@ private let DROPDOWN_MENU_ANIMATE_DURATION: NSTimeInterval = 0.5
 public protocol PCDropdownMenuViewDataSource: NSObjectProtocol {
     
     // 菜单项总个数
-    func numberOfRowInDropdownMenuView(view: PCDropdownMenuView) -> Int
+    func numberOfRowInDropdownMenuView(_ view: PCDropdownMenuView) -> Int
     // 根据索引返回对应的菜单项
-    func dropdownMenuView(view: PCDropdownMenuView, itemForRowAtIndexPath indexPath: NSIndexPath) -> PCDropdownMenuItem
+    func dropdownMenuView(_ view: PCDropdownMenuView, itemForRowAtIndexPath indexPath: IndexPath) -> PCDropdownMenuItem
     // 下拉菜单的箭头图标
-    func dropdownMenuViewArrowImage(view: PCDropdownMenuView) -> UIImage?
+    func dropdownMenuViewArrowImage(_ view: PCDropdownMenuView) -> UIImage?
     // 下拉菜单内容区域的frame,高度自适应
-    func dropdownMenuViewContentFrame(view: PCDropdownMenuView) -> CGRect
+    func dropdownMenuViewContentFrame(_ view: PCDropdownMenuView) -> CGRect
     // 箭头图标的水平偏移值,调节箭头靠左还是靠右(忽略垂直偏移)
-    func dropdownMenuViewArrowImageOffset(view: PCDropdownMenuView) -> UIOffset
+    func dropdownMenuViewArrowImageOffset(_ view: PCDropdownMenuView) -> UIOffset
     
 }
 
@@ -33,35 +33,35 @@ public protocol PCDropdownMenuViewDataSource: NSObjectProtocol {
 
 @objc public protocol PCDropdownMenuViewDelegate: NSObjectProtocol {
     // 菜单项被点击后的回调
-    optional func dropdownMenuViewDidSelectedItem(view: PCDropdownMenuView, inIndex index: Int)
+    @objc optional func dropdownMenuViewDidSelectedItem(_ view: PCDropdownMenuView, inIndex index: Int)
 }
 
 
 // MARK: -
 
-public class PCDropdownMenuView: UIView, UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate {
+open class PCDropdownMenuView: UIView, UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate {
 
-    weak public var dataSource: PCDropdownMenuViewDataSource?
-    weak public var delegate: PCDropdownMenuViewDelegate?
+    weak open var dataSource: PCDropdownMenuViewDataSource?
+    weak open var delegate: PCDropdownMenuViewDelegate?
     
-    private var contentView = UIView()
-    private var arrowImageView = UIImageView()
-    private var tableView = UITableView(frame: CGRectZero, style: UITableViewStyle.Plain)
+    fileprivate var contentView = UIView()
+    fileprivate var arrowImageView = UIImageView()
+    fileprivate var tableView = UITableView(frame: CGRect.zero, style: UITableViewStyle.plain)
     
     // MARK: - Override Property
     
-    override public var frame: CGRect {
+    override open var frame: CGRect {
         set {
-            super.frame = UIScreen.mainScreen().bounds
+            super.frame = UIScreen.main.bounds
         }
         get {
             return super.frame
         }
     }
     
-    override public var bounds: CGRect {
+    override open var bounds: CGRect {
         set {
-            super.bounds = UIScreen.mainScreen().bounds
+            super.bounds = UIScreen.main.bounds
         }
         get {
             return super.bounds
@@ -88,22 +88,22 @@ public class PCDropdownMenuView: UIView, UITableViewDataSource, UITableViewDeleg
         tableView.rowHeight = 44.0
         tableView.layer.cornerRadius = 5.0
         tableView.layer.masksToBounds = true
-        tableView.scrollEnabled = false
+        tableView.isScrollEnabled = false
     }
 
     required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    public override func layoutSubviews() {
+    open override func layoutSubviews() {
         super.layoutSubviews()
         
         if let dataSource = self.dataSource {
             let image = dataSource.dropdownMenuViewArrowImage(self)
             let offset = dataSource.dropdownMenuViewArrowImageOffset(self)
-            let imageSize = image?.size ?? CGSizeZero
+            let imageSize = image?.size ?? CGSize.zero
             arrowImageView.image = image
-            arrowImageView.frame = CGRectMake(offset.horizontal, 0.0, imageSize.width, imageSize.height)
+            arrowImageView.frame = CGRect(x: offset.horizontal, y: 0.0, width: imageSize.width, height: imageSize.height)
             
             let count = dataSource.numberOfRowInDropdownMenuView(self)
             let tableHeight = CGFloat(count) * tableView.rowHeight
@@ -111,65 +111,65 @@ public class PCDropdownMenuView: UIView, UITableViewDataSource, UITableViewDeleg
             frame.size.height = imageSize.height + tableHeight
             contentView.frame = frame
             
-            tableView.frame = CGRectMake(0.0, imageSize.height, frame.size.width, tableHeight)
+            tableView.frame = CGRect(x: 0.0, y: imageSize.height, width: frame.size.width, height: tableHeight)
         }
     }
     
     
     // MARK: - Public
     
-    public func showWithAnimate(animate: Bool) {
-        UIApplication.sharedApplication().keyWindow?.addSubview(self)
+    open func showWithAnimate(_ animate: Bool) {
+        UIApplication.shared.keyWindow?.addSubview(self)
         if !animate {
             contentView.alpha = 1.0
             return
         }
         contentView.alpha = 0.0
-        UIView.animateWithDuration(DROPDOWN_MENU_ANIMATE_DURATION) { () -> Void in
+        UIView.animate(withDuration: DROPDOWN_MENU_ANIMATE_DURATION) { () -> Void in
             self.contentView.alpha = 1.0
         }
     }
     
-    public func hiddenWithAnimate(animate: Bool) {
+    open func hiddenWithAnimate(_ animate: Bool) {
         if !animate {
             self.removeFromSuperview()
             return
         }
-        UIView.animateWithDuration(DROPDOWN_MENU_ANIMATE_DURATION, animations: { () -> Void in
+        UIView.animate(withDuration: DROPDOWN_MENU_ANIMATE_DURATION, animations: { () -> Void in
             self.contentView.alpha = 0.0
             }) { (_) -> Void in
                 self.removeFromSuperview()
         }
     }
     
-    public func tapGestureAction(recognizer: UITapGestureRecognizer) {
+    open func tapGestureAction(_ recognizer: UITapGestureRecognizer) {
         self.hiddenWithAnimate(true)
     }
     
     // MARK: - UITableViewDataSource
     
-    public func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    open func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    public func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    open func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let dataSource = self.dataSource {
             return dataSource.numberOfRowInDropdownMenuView(self)
         }
         return 0
     }
     
-    public func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    open func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let identifier = "Cell"
-        var cell = tableView.dequeueReusableCellWithIdentifier(identifier)
+        var cell = tableView.dequeueReusableCell(withIdentifier: identifier)
         if cell == nil {
-            cell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: identifier)
+            cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: identifier)
         }
         
         if let dataSource = self.dataSource {
             let item = dataSource.dropdownMenuView(self, itemForRowAtIndexPath: indexPath)
             cell?.textLabel?.text = item.name
-            if let icon = item.icon where icon.isEmpty == false {
+            if let icon = item.icon , icon.isEmpty == false {
                 cell?.imageView?.image = UIImage(named: icon)
             }
         }
@@ -180,15 +180,15 @@ public class PCDropdownMenuView: UIView, UITableViewDataSource, UITableViewDeleg
     
     // MARK: - UITableViewDelegate
     
-    public func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: false)
-        self.delegate?.dropdownMenuViewDidSelectedItem?(self, inIndex: indexPath.row)
+    open func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: false)
+        self.delegate?.dropdownMenuViewDidSelectedItem?(self, inIndex: (indexPath as NSIndexPath).row)
     }
     
     
     // MARK: - UIGestureRecognizerDelegate
     
-    public func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldReceiveTouch touch: UITouch) -> Bool {
+    open func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
         return (touch.view == self)
     }
 

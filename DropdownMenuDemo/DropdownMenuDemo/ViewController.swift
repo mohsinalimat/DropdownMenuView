@@ -11,7 +11,7 @@ import UIKit
 class ViewController: UIViewController, PCDropdownMenuViewDataSource, PCDropdownMenuViewDelegate {
     
     let dropdownMenuView = PCDropdownMenuView()
-    let menuWidth: CGFloat = 155.0
+    let menuWidth: CGFloat = 165.0
     var items: [PCDropdownMenuItem] = []
     
     
@@ -19,9 +19,9 @@ class ViewController: UIViewController, PCDropdownMenuViewDataSource, PCDropdown
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor.whiteColor()
+        self.view.backgroundColor = UIColor.white
         
-        let barButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: #selector(ViewController.showDropdownMenu))
+        let barButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.add, target: self, action: #selector(ViewController.showDropdownMenu))
         self.navigationItem.rightBarButtonItem = barButton
         
         dropdownMenuView.dataSource = self
@@ -40,7 +40,7 @@ class ViewController: UIViewController, PCDropdownMenuViewDataSource, PCDropdown
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        dropdownMenuView.frame = CGRectZero
+        dropdownMenuView.frame = CGRect.zero
     }
 
     func showDropdownMenu() {
@@ -49,32 +49,32 @@ class ViewController: UIViewController, PCDropdownMenuViewDataSource, PCDropdown
     
     // MARK: - PCDropdownMenuViewDataSource
     
-    func numberOfRowInDropdownMenuView(view: PCDropdownMenuView) -> Int {
+    func numberOfRowInDropdownMenuView(_ view: PCDropdownMenuView) -> Int {
         return items.count
     }
     
-    func dropdownMenuView(view: PCDropdownMenuView, itemForRowAtIndexPath indexPath: NSIndexPath) -> PCDropdownMenuItem {
-        return items[indexPath.row]
+    func dropdownMenuView(_ view: PCDropdownMenuView, itemForRowAtIndexPath indexPath: IndexPath) -> PCDropdownMenuItem {
+        return items[(indexPath as NSIndexPath).row]
     }
     
-    func dropdownMenuViewArrowImageOffset(view: PCDropdownMenuView) -> UIOffset {
+    func dropdownMenuViewArrowImageOffset(_ view: PCDropdownMenuView) -> UIOffset {
         return UIOffset(horizontal: menuWidth - 25.0, vertical: 0.0)
     }
     
-    func dropdownMenuViewContentFrame(view: PCDropdownMenuView) -> CGRect {
+    func dropdownMenuViewContentFrame(_ view: PCDropdownMenuView) -> CGRect {
         let isPortrait = UIInterfaceOrientationIsPortrait(self.interfaceOrientation)
-        let x: CGFloat = UIScreen.mainScreen().bounds.size.width - menuWidth - 5.0
+        let x: CGFloat = UIScreen.main.bounds.size.width - menuWidth - 5.0
         let y: CGFloat = isPortrait ? 64.0 : (self.navigationController?.navigationBar.frame.size.height ?? 44.0)
-        return CGRectMake(x, y, menuWidth, 0.0)
+        return CGRect(x: x, y: y, width: menuWidth, height: 0.0)
     }
     
-    func dropdownMenuViewArrowImage(view: PCDropdownMenuView) -> UIImage? {
+    func dropdownMenuViewArrowImage(_ view: PCDropdownMenuView) -> UIImage? {
         return UIImage(named: "mqz_qun_header_arrow_icon@2x.png")
     }
     
     // MARK: - PCDropdownMenuViewDelegate
     
-    func dropdownMenuViewDidSelectedItem(view: PCDropdownMenuView, inIndex index: Int) {
+    func dropdownMenuViewDidSelectedItem(_ view: PCDropdownMenuView, inIndex index: Int) {
         view.hiddenWithAnimate(true)
         
         let item = items[index]

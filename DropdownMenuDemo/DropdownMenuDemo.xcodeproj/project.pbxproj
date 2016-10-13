@@ -227,15 +227,18 @@
 				TargetAttributes = {
 					ACD538BB1BF41DD9008E6E9D = {
 						CreatedOnToolsVersion = 7.1;
+						LastSwiftMigration = 0800;
 					};
 					ACD538CF1BF41DD9008E6E9D = {
 						CreatedOnToolsVersion = 7.1;
 						DevelopmentTeam = CMYM93G8R6;
+						LastSwiftMigration = 0800;
 						TestTargetID = ACD538BB1BF41DD9008E6E9D;
 					};
 					ACD538DA1BF41DD9008E6E9D = {
 						CreatedOnToolsVersion = 7.1;
 						DevelopmentTeam = CMYM93G8R6;
+						LastSwiftMigration = 0800;
 						TestTargetID = ACD538BB1BF41DD9008E6E9D;
 					};
 				};
@@ -382,7 +385,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -420,7 +423,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -442,6 +445,7 @@
 				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = cn.devpc.DropdownMenuDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -460,6 +464,7 @@
 				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = cn.devpc.DropdownMenuDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -471,6 +476,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = cn.devpc.DropdownMenuDemoTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DropdownMenuDemo.app/DropdownMenuDemo";
 			};
 			name = Debug;
@@ -483,6 +489,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = cn.devpc.DropdownMenuDemoTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DropdownMenuDemo.app/DropdownMenuDemo";
 			};
 			name = Release;
@@ -494,6 +501,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = cn.devpc.DropdownMenuDemoUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = DropdownMenuDemo;
 				USES_XCTRUNNER = YES;
 			};
@@ -506,6 +514,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = cn.devpc.DropdownMenuDemoUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = DropdownMenuDemo;
 				USES_XCTRUNNER = YES;
 			};
@@ -530,6 +539,7 @@
 				ACD538E61BF41DD9008E6E9D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		ACD538E71BF41DD9008E6E9D /* Build configuration list for PBXNativeTarget "DropdownMenuDemoTests" */ = {
 			isa = XCConfigurationList;
@@ -538,6 +548,7 @@
 				ACD538E91BF41DD9008E6E9D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		ACD538EA1BF41DD9008E6E9D /* Build configuration list for PBXNativeTarget "DropdownMenuDemoUITests" */ = {
 			isa = XCConfigurationList;
@@ -546,6 +557,7 @@
 				ACD538EC1BF41DD9008E6E9D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
